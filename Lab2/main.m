@@ -4,6 +4,7 @@ M = audioinfo('heyhey.wav');
 y1 = y(:,1);
 y2 = y(:,2);
 y = (y1+y2)/2;
+y_diff = y1-y2;
 samples = M.TotalSamples/2;
 %% Parameters
 blockSize = 512; %  256-2048 are typical
@@ -29,8 +30,7 @@ a = hist (yQuant(:), unique(yQuant));
 p = a/length(yQuant);
 
 L = huffman(p);
-R = L/length(a);
-
+R = L;
 
 %% Stats
 

@@ -58,8 +58,6 @@ pred2_y3 = predictor2(y3);
 %sound(pred2_y1/128, Fs1)
 
 
-
-
 %% Memoryless Huffman Coding of prediction
 
 err1 = abs(pred2_y1 - y1);
@@ -83,6 +81,4 @@ expected_codeword_length_3 = huffman(p3);
 R1 = expected_codeword_length_1; %3.4908
 R2 = expected_codeword_length_2; %1.5940
 R3 = expected_codeword_length_3; %2.7329
-
-
 
