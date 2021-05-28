@@ -58,31 +58,48 @@ pred2_y3 = predictor2(y3);
 %sound(pred2_y1/128, Fs1)
 
 
+%% Memoryless Huffman Coding of prediction
+a1 = hist (pred2_y1, unique(pred2_y1));
+p1 = a1/length(pred2_y1);
+
+a2 = hist (pred2_y2, unique(pred2_y2));
+p2 = a2/length(pred2_y2);
+
+a3 = hist (pred2_y3, unique(pred2_y3));
+p3 = a3/length(pred2_y3);
+
+expected_codeword_length_1 = huffman(p1); 
+expected_codeword_length_2 = huffman(p2); 
+expected_codeword_length_3 = huffman(p3); 
+
+R1 = expected_codeword_length_1;
+R2 = expected_codeword_length_2;
+R3 = expected_codeword_length_3;
 
 
 %% Memoryless Huffman Coding of prediction
 
-err1 = abs(pred2_y1 - y1);
-err2 = abs(pred2_y2 - y2);
-err3 = abs(pred2_y3 - y3);
+d1 = abs(pred2_y1 - y1);
+d2 = abs(pred2_y2 - y2);
+d3 = abs(pred2_y3 - y3);
 
-a1 = hist (err1, unique(err1));
-p1 = a1/length(err1);
+a1 = hist (d1, unique(d1));
+p1 = a1/length(d1);
 
-a2 = hist (err2, unique(err2));
-p2 = a2/length(err2);
+a2 = hist (d2, unique(d2));
+p2 = a2/length(d2);
 
-a3 = hist (err3, unique(err3));
-p3 = a3/length(err3);
+a3 = hist (d3, unique(d3));
+p3 = a3/length(d3);
 
 expected_codeword_length_1 = huffman(p1);
 expected_codeword_length_2 = huffman(p2); 
 expected_codeword_length_3 = huffman(p3); 
 
 
-R1 = expected_codeword_length_1; %3.4908
-R2 = expected_codeword_length_2; %1.5940
-R3 = expected_codeword_length_3; %2.7329
+R1 = expected_codeword_length_1;
+R2 = expected_codeword_length_2;
+R3 = expected_codeword_length_3;
 
 
 
