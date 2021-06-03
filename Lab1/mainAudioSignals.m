@@ -41,9 +41,9 @@ expected_codeword_length_1 = huffman(p1); %7.1968
 expected_codeword_length_2 = huffman(p2); %6.8273
 expected_codeword_length_3 = huffman(p3); %5.4512
 
-R1 = expected_codeword_length_1;
-R2 = expected_codeword_length_2;
-R3 = expected_codeword_length_3;
+R1 = expected_codeword_length_1; %7.1968
+R2 = expected_codeword_length_2; %6.8273
+R3 = expected_codeword_length_3; %5.4512
 
 %% Simple predictive coding
 
@@ -58,7 +58,31 @@ pred2_y3 = predictor2(y3);
 %sound(pred2_y1/128, Fs1)
 
 
-%% Memoryless Huffman Coding of prediction
+%% Memoryless Huffman Coding of prediction Error Predictor 1
+
+err1 = abs(pred1_y1 - y1);
+err2 = abs(pred1_y2 - y2);
+err3 = abs(pred1_y3 - y3);
+
+a1 = hist (err1, unique(err1));
+p1 = a1/length(err1);
+
+a2 = hist (err2, unique(err2));
+p2 = a2/length(err2);
+
+a3 = hist (err3, unique(err3));
+p3 = a3/length(err3);
+
+expected_codeword_length_1 = huffman(p1);
+expected_codeword_length_2 = huffman(p2); 
+expected_codeword_length_3 = huffman(p3); 
+
+
+R1 = expected_codeword_length_1; %3.4928
+R2 = expected_codeword_length_2; %2.1014
+R3 = expected_codeword_length_3; %3.2888
+
+%% Memoryless Huffman Coding of prediction Error Predictor 2
 
 err1 = abs(pred2_y1 - y1);
 err2 = abs(pred2_y2 - y2);
@@ -76,7 +100,6 @@ p3 = a3/length(err3);
 expected_codeword_length_1 = huffman(p1);
 expected_codeword_length_2 = huffman(p2); 
 expected_codeword_length_3 = huffman(p3); 
-
 
 R1 = expected_codeword_length_1; %3.4908
 R2 = expected_codeword_length_2; %1.5940

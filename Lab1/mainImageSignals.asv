@@ -110,11 +110,11 @@ expected_codeword_length_1 = huffman(p1);
 expected_codeword_length_2 = huffman(p2); 
 expected_codeword_length_3 = huffman(p3); 
 
-R1 = expected_codeword_length_1; %5.9627
+R1 = expected_codeword_length_1; %
 R2 = expected_codeword_length_2; %4.1407
 R3 = expected_codeword_length_3; %3.6010
 
-%% Memoryless Huffman Coding of prediction error, predictor 2
+%% Memoryless Huffman Coding of prediction error, predictor 1
 
 x = size(img1,1);
 y = size(img1,2);
@@ -144,11 +144,11 @@ expected_codeword_length_1 = huffman(p1);
 expected_codeword_length_2 = huffman(p2); 
 expected_codeword_length_3 = huffman(p3); 
 
-R1 = expected_codeword_length_1; %5.6251
-R2 = expected_codeword_length_2; %4.3571
-R3 = expected_codeword_length_3; %5.4604
+R1 = expected_codeword_length_1;
+R2 = expected_codeword_length_2;
+R3 = expected_codeword_length_3;
 
-%% Memoryless Huffman Coding of prediction error, predictor 3
+%% Memoryless Huffman Coding of prediction error, predictor 1
 
 x = size(img1,1);
 y = size(img1,2);
@@ -156,9 +156,9 @@ count1 = zeros(256,1); %0-255
 count2 = zeros(256,1); %0-255
 count3 = zeros(256,1); %0-255
 
-err1 = abs(img1 - pred3_img1);
-err2 = abs(img2 - pred3_img2);
-err3 = abs(img3 - pred3_img3);
+err1 = abs(img1 - pred2_img1);
+err2 = abs(img2 - pred2_img2);
+err3 = abs(img3 - pred2_img3);
 
 
 for i = 1:x
@@ -173,10 +173,11 @@ p1 = count1./ (x*y);
 p2 = count2./ (x*y);
 p3 = count3./ (x*y);
 
+
 expected_codeword_length_1 = huffman(p1); 
 expected_codeword_length_2 = huffman(p2); 
 expected_codeword_length_3 = huffman(p3); 
 
-R1 = expected_codeword_length_1; %5.9110
-R2 = expected_codeword_length_2; %4.0131
-R3 = expected_codeword_length_3; %3.7981
+R1 = expected_codeword_length_1;
+R2 = expected_codeword_length_2;
+R3 = expected_codeword_length_3;
