@@ -58,8 +58,8 @@ for c=2:3                          % Loop over the two chrominance components
   % If you're using chrominance subsampling, it should be done
   % here, before the transform.
   tmp = imresize(tmp, 1/subsamplingFactor);
-  x = size(tmp,1)
-  y = size(tmp,2)
+  x = size(tmp,1);
+  y = size(tmp,2);
 
   tmp = bdct(tmp, blocksize);      % DCT
   tmp = bquant(tmp, qc);           % Simple quantization
@@ -77,27 +77,26 @@ for c=2:3                          % Loop over the two chrominance components
   % If you're using chrominance subsampling, this is where the
   % signal should be upsampled, after the inverse transform.
   tmp = imresize(tmp, subsamplingFactor);
-  
   imyr(:,:,c) = tmp;
   
 end
 
 % Display total number of bits and bits per pixel
-bits
-bpp = bits/(size(im,1)*size(im,2))
+bits;
+bpp = bits/(size(im,1)*size(im,2));
 
 % Revert to RGB colour space again.
 imr=ycbcr2rgb(imyr);
 
 % Measure distortion and PSNR
-dist = mean((im(:)-imr(:)).^2)
-psnr = 10*log10(1/dist)
+dist = mean((im(:)-imr(:)).^2);
+psnr = 10*log10(1/dist);
 
 % Display the original image
-figure, imshow(im)
-title('Original image')
+%figure, imshow(im)
+%title('Original image')
 
 %Display the coded and decoded image
-figure, imshow(imr);
-title(sprintf('Decoded image, %5.2f bits/pixel, PSNR %5.2f dB', bpp, psnr))
+%figure, imshow(imr);
+%title(sprintf('Decoded image, %5.2f bits/pixel, PSNR %5.2f dB', bpp, psnr))
 

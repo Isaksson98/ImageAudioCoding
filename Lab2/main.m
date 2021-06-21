@@ -7,8 +7,8 @@ y2 = y(:,2);
 %y_diff = y1-y2;
 %samples = M.TotalSamples/2;
 %% Parameters
-blockSize = 512; %  256-2048 are typical
-quantStep = 0.03;
+blockSize = 512; % 256-2048 are typical
+quantStep = 0.018;
 %% Transform
 
 C1 = DCT(y1, blockSize);
@@ -35,34 +35,32 @@ output2 = reshape(output2,[],1);
 
 %% Memoryless Huffman Coding
 a = hist (y1Quant(:), unique(y1Quant));
-p = a/length(y1Quant);
+p = a/sum(a);
 
 L1 = huffman(p);
 R1 = L1;
 
 
 a = hist (y2Quant(:), unique(y2Quant));
-p = a/length(y2Quant);
+p = a/sum(a);
 
 L2 = huffman(p);
 R2 = L2;
+
 %% Stats
-SNR1 = snr(y1, output1);
-SNR2 = snr(y2, output2);
-SNR = (SNR1+SNR2)/2;
+SNR = snr_stereo(y1, output1, y2, output2);
 
 L = length(a);
 SI_len = L * ceil(log2(L));
+side_info = SI_len / length(y1);
 
 R_stereo = R1+R2;
-R_SInf = R_stereo + SI_len / length(y1);
+R_SInf = R_stereo + side_info;
 
 fprintf('\nOUTPUT:\n')
-fprintf('R_stereo:       %f\n', R_stereo*fs)
-fprintf('SNR1:           %f\n', SNR1)
-fprintf('SNR2:           %f\n', SNR2)
-fprintf('SNR_avg:        %f\n', SNR)
-fprintf('R + sideinfo:   %f\n', R_SInf*fs)
+fprintf('R_stereo:       %f\n', R_stereo*fs/1000)
+fprintf('SNR:            %f\n', SNR)
+fprintf('R + sideinfo:   %f\n', R_SInf*fs/1000)
 %% Play sound
 %sound(output,fs)
 %audiowrite('ReconstructedSignal.wav', output1, fs);

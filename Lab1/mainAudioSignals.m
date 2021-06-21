@@ -60,9 +60,9 @@ pred2_y3 = predictor2(y3);
 
 %% Memoryless Huffman Coding of prediction Error Predictor 1
 
-err1 = abs(pred1_y1 - y1);
-err2 = abs(pred1_y2 - y2);
-err3 = abs(pred1_y3 - y3);
+err1 = pred1_y1 - y1;
+err2 = pred1_y2 - y2;
+err3 = pred1_y3 - y3;
 
 a1 = hist (err1, unique(err1));
 p1 = a1/length(err1);
@@ -78,15 +78,15 @@ expected_codeword_length_2 = huffman(p2);
 expected_codeword_length_3 = huffman(p3); 
 
 
-R1 = expected_codeword_length_1; %3.4928
-R2 = expected_codeword_length_2; %2.1014
-R3 = expected_codeword_length_3; %3.2888
+R1 = expected_codeword_length_1; %4.3405
+R2 = expected_codeword_length_2; %2.7894
+R3 = expected_codeword_length_3; %3.9366
 
 %% Memoryless Huffman Coding of prediction Error Predictor 2
 
-err1 = abs(pred2_y1 - y1);
-err2 = abs(pred2_y2 - y2);
-err3 = abs(pred2_y3 - y3);
+err1 = pred2_y1 - y1;
+err2 = pred2_y2 - y2;
+err3 = pred2_y3 - y3;
 
 a1 = hist (err1, unique(err1));
 p1 = a1/length(err1);
@@ -101,7 +101,7 @@ expected_codeword_length_1 = huffman(p1);
 expected_codeword_length_2 = huffman(p2); 
 expected_codeword_length_3 = huffman(p3); 
 
-R1 = expected_codeword_length_1; %3.4908
-R2 = expected_codeword_length_2; %1.5940
-R3 = expected_codeword_length_3; %2.7329
+R1 = expected_codeword_length_1; %4.3191
+R2 = expected_codeword_length_2; %1.9876
+R3 = expected_codeword_length_3; %3.3527
 

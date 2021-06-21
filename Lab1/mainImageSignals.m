@@ -65,39 +65,39 @@ R3 = expected_codeword_length_3; %6.3914
 pred1_img1 = predictor2D_1(img1);
 pred1_img2 = predictor2D_1(img2);
 pred1_img3 = predictor2D_1(img3);
-figure(1)
-image(pred1_img2);
+%figure(1)
+%image(pred1_img2);
 
 pred2_img1 = predictor2D_2(img1);
 pred2_img2 = predictor2D_2(img2);
 pred2_img3 = predictor2D_2(img3);
-figure(2)
-image(pred2_img2);
+%figure(2)
+%image(pred2_img2);
 
 pred3_img1 = predictor2D_3(img1);
 pred3_img2 = predictor2D_3(img2);
 pred3_img3 = predictor2D_3(img3);
-figure(3)
-image(pred3_img2);
+%figure(3)
+%image(pred3_img2);
 
 %% Memoryless Huffman Coding of prediction error, predictor 1
 
 x = size(img1,1);
 y = size(img1,2);
-count1 = zeros(256,1); %0-255
-count2 = zeros(256,1); %0-255
-count3 = zeros(256,1); %0-255
+count1 = zeros(512,1); %-255 -> +255
+count2 = zeros(512,1); %-255 -> +255
+count3 = zeros(512,1); %-255 -> +255
 
-err1 = abs(img1 - pred1_img1);
-err2 = abs(img2 - pred1_img2);
-err3 = abs(img3 - pred1_img3);
+err1 = img1 - pred1_img1;
+err2 = img2 - pred1_img2;
+err3 = img3 - pred1_img3;
 
 
 for i = 1:x
     for j = 1:y
-       count1(err1(i,j)+1) = count1(err1(i,j)+1) + 1; %increment
-       count2(err2(i,j)+1) = count2(err2(i,j)+1) + 1; %increment
-       count3(err3(i,j)+1) = count3(err3(i,j)+1) + 1; %increment
+       count1(err1(i,j)+1+255) = count1(err1(i,j)+1+255) + 1; %increment
+       count2(err2(i,j)+1+255) = count2(err2(i,j)+1+255) + 1; %increment
+       count3(err3(i,j)+1+255) = count3(err3(i,j)+1+255) + 1; %increment
     end
 end
 
@@ -110,28 +110,28 @@ expected_codeword_length_1 = huffman(p1);
 expected_codeword_length_2 = huffman(p2); 
 expected_codeword_length_3 = huffman(p3); 
 
-R1 = expected_codeword_length_1; %5.9627
-R2 = expected_codeword_length_2; %4.1407
-R3 = expected_codeword_length_3; %3.6010
+R1 = expected_codeword_length_1 %6.9362
+R2 = expected_codeword_length_2 %5.0295
+R3 = expected_codeword_length_3 %4.4877
 
 %% Memoryless Huffman Coding of prediction error, predictor 2
 
 x = size(img1,1);
 y = size(img1,2);
-count1 = zeros(256,1); %0-255
-count2 = zeros(256,1); %0-255
-count3 = zeros(256,1); %0-255
+count1 = zeros(512,1); %-255 -> +255
+count2 = zeros(512,1); %-255 -> +255
+count3 = zeros(512,1); %-255 -> +255
 
-err1 = abs(img1 - pred2_img1);
-err2 = abs(img2 - pred2_img2);
-err3 = abs(img3 - pred2_img3);
+err1 = img1 - pred2_img1;
+err2 = img2 - pred2_img2;
+err3 = img3 - pred2_img3;
 
 
 for i = 1:x
     for j = 1:y
-       count1(err1(i,j)+1) = count1(err1(i,j)+1) + 1; %increment
-       count2(err2(i,j)+1) = count2(err2(i,j)+1) + 1; %increment
-       count3(err3(i,j)+1) = count3(err3(i,j)+1) + 1; %increment
+       count1(err1(i,j)+1+255) = count1(err1(i,j)+1+255) + 1; %increment
+       count2(err2(i,j)+1+255) = count2(err2(i,j)+1+255) + 1; %increment
+       count3(err3(i,j)+1+255) = count3(err3(i,j)+1+255) + 1; %increment
     end
 end
 
@@ -144,28 +144,28 @@ expected_codeword_length_1 = huffman(p1);
 expected_codeword_length_2 = huffman(p2); 
 expected_codeword_length_3 = huffman(p3); 
 
-R1 = expected_codeword_length_1; %5.6251
-R2 = expected_codeword_length_2; %4.3571
-R3 = expected_codeword_length_3; %5.4604
+R1 = expected_codeword_length_1; %6.5944
+R2 = expected_codeword_length_2; %5.2640
+R3 = expected_codeword_length_3; %6.4169
 
 %% Memoryless Huffman Coding of prediction error, predictor 3
 
 x = size(img1,1);
 y = size(img1,2);
-count1 = zeros(256,1); %0-255
-count2 = zeros(256,1); %0-255
-count3 = zeros(256,1); %0-255
+count1 = zeros(512,1); %-255 -> +255
+count2 = zeros(512,1); %-255 -> +255
+count3 = zeros(512,1); %-255 -> +255
 
-err1 = abs(img1 - pred3_img1);
-err2 = abs(img2 - pred3_img2);
-err3 = abs(img3 - pred3_img3);
+err1 = img1 - pred3_img1;
+err2 = img2 - pred3_img2;
+err3 = img3 - pred3_img3;
 
 
 for i = 1:x
     for j = 1:y
-       count1(err1(i,j)+1) = count1(err1(i,j)+1) + 1; %increment
-       count2(err2(i,j)+1) = count2(err2(i,j)+1) + 1; %increment
-       count3(err3(i,j)+1) = count3(err3(i,j)+1) + 1; %increment
+       count1(err1(i,j)+1+255) = count1(err1(i,j)+1+255) + 1; %increment
+       count2(err2(i,j)+1+255) = count2(err2(i,j)+1+255) + 1; %increment
+       count3(err3(i,j)+1+255) = count3(err3(i,j)+1+255) + 1; %increment
     end
 end
 
@@ -177,6 +177,6 @@ expected_codeword_length_1 = huffman(p1);
 expected_codeword_length_2 = huffman(p2); 
 expected_codeword_length_3 = huffman(p3); 
 
-R1 = expected_codeword_length_1; %5.9110
-R2 = expected_codeword_length_2; %4.0131
-R3 = expected_codeword_length_3; %3.7981
+R1 = expected_codeword_length_1; %6.8858
+R2 = expected_codeword_length_2; %4.9300
+R3 = expected_codeword_length_3; %4.7097
